@@ -14,6 +14,12 @@ import { UserModule } from './user/user.module';
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: ExceptionLoggerFilter,
+    // },
+  ],
 })
 export class AppModule {}

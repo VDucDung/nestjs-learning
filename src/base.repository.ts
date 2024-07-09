@@ -1,5 +1,5 @@
 import { Model, FilterQuery, QueryOptions, Document } from 'mongoose';
-
+import { ObjectId } from 'mongodb';
 export class BaseRepository<T extends Document> {
   constructor(private readonly model: Model<T>) {}
 
@@ -9,6 +9,10 @@ export class BaseRepository<T extends Document> {
   }
 
   async findById(id: string, option?: QueryOptions): Promise<T | null> {
+    if (!ObjectId.isValid(id)) {
+      return null;
+    }
+
     return this.model.findById(id, null, option).exec();
   }
 

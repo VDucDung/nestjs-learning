@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePostDto, UpdatePostDto } from '../dto/post.dto';
 import { PostRepository } from '../repositories/post.repository';
 
@@ -11,11 +11,13 @@ export class PostService {
   }
 
   async getPostById(post_id: string) {
-    const post = this.postRepository.findById(post_id);
+    const post = await this.postRepository.findById(post_id);
     if (post) {
       return post;
+    } else {
+      throw new NotFoundException(post_id);
     }
-    throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
+    // throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
   }
 
   async replacePost(post_id: string, data: UpdatePostDto) {

@@ -7,6 +7,9 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
+  // const { httpAdapter } = app.get(HttpAdapterHost);
+  // app.useGlobalFilters(new ExceptionLoggerFilter(httpAdapter));
+
   await app.listen(3000);
 }
 bootstrap();
