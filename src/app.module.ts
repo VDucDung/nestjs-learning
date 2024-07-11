@@ -1,3 +1,4 @@
+import { CategoryModule } from './category/category.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,6 +13,7 @@ import { UserModule } from './user/user.module';
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGO_URL),
     UserModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [
